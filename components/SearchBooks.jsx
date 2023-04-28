@@ -1,22 +1,27 @@
 import axios from "axios";
 import { createSignal } from "solid-js";
+import {Route, Router, A} from '@solidjs/router';
 
 function SearchBooks() {
   const [searchText, setSearchText] = createSignal("");
-  const [book, setBook] = createSignal(null);
+  const [books, setBook] = createSignal([]);
+  console.log(books)
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.get(
         `https://www.googleapis.com/books/v1/volumes?q=${searchText()}`
       );
-      const books = response.data.items;
-      console.log(books);
-      setBook(response.data);
+      if (response) {
+        const books = response.data.items;
+        console.log(books);
+        setBook(books);
+      }
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
     <div className="w-full mt-10 bg-gray-100 flex justify-center items-center">
       <div className="container mx-auto dark:bg-gray-900 rounded-lg p-14">
@@ -41,7 +46,30 @@ function SearchBooks() {
           </div>
         </form>
       </div>
+      {books().map((book) => (
+        <Book book={book} />
+      ))}
     </div>
   );
 }
+
+
+function Book(props) {
+  const { id } = props.book;
+  const { title } = props.book.volumeInfo;
+  const  authors  = [props.book.volumeInfo.authors];
+  const linkTo = {
+    pathname: `/searched-books/${id}`,
+    state: { bookData: props.book },
+  };
+
+  return (
+    <div>
+      <h2>{title}</h2>
+      <p>Author: {authors.join(", ")}</p>
+      {/* <A to={linkTo}>View details </A> */}
+    </div>
+  );
+}
+
 export default SearchBooks;
