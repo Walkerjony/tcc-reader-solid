@@ -12,13 +12,13 @@ function App() {
     <>
     <Header />
     <SearchBooks />
-    {/* <AboutInfo /> */}
+    <AboutInfo />
     <Tips />
     <Cards />
-    {/* <Router>
+    <Router>
       <Route exact path="/" component={SearchBooks} />
       <Route path="/searched-books/:id" component={BookInfo} />
-    </Router> */}
+    </Router>
     </>
   );
 }
