@@ -1,26 +1,16 @@
 
-import Header from '/components/Header'
-import SearchBooks from '/components/SearchBooks'
-import BookInfo from '/components/BookInfo'
-import AboutInfo from '/components/AboutInfo'
-import Tips from '/components/Tips'
-import Cards from '/components/Cards'
-import {Route, Router} from '@solidjs/router';
+import Home from '/pages/Home';
+import ShowBooks from '/pages/ShowBooks'
+import {Route, Routes} from '@solidjs/router';
+import BookInfo from '../components/ShowBook/BookInfo';
+
 
 function App() {
   return (
-    <>
-    <Header />
-    <SearchBooks />
-    <AboutInfo />
-    <Tips />
-    <Cards />
-    <Router>
-      <Route exact path="/" component={SearchBooks} />
-      <Route path="/searched-books/:id" component={BookInfo} />
-    </Router>
-    </>
+    <Routes>
+     <Route path={"/"} component={Home}></Route>
+     <Route path={"/books/:id"} component={ShowBooks}></Route>
+    </Routes>
   );
 }
-
 export default App;
