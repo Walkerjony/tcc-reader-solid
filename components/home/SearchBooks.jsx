@@ -87,10 +87,11 @@ function Book({book, ...props}) {
   const navigate = useNavigate();
   const { id } = book;
   const { title } = book.volumeInfo;
+  const  description  = book.volumeInfo.description;
   const  authors  = [book.volumeInfo.authors];
 
   const showInfo = (props) => {
-    navigate(`/books/${id}`, {state: { title, authors  } })
+    navigate(`/books/${id}`, {state: { title, authors, description  } })
     console.log(book)
     console.log(title)
   }
