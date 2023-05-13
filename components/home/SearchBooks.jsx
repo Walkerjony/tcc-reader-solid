@@ -89,10 +89,11 @@ function Book({book, ...props}) {
   const { title } = book.volumeInfo;
   const  description  = book.volumeInfo.description;
   const publishedDate = book.volumeInfo.publishedDate;
+  const image = book.volumeInfo.imageLinks?.thumbnail
   const  authors  = [book.volumeInfo.authors];
 
   const showInfo = (props) => {
-    navigate(`/books/${id}`, {state: { title, authors, description, publishedDate  } })
+    navigate(`/books/${id}`, {state: { title, authors, description, publishedDate,  } })
     console.log(book)
     console.log(title)
   }
@@ -101,8 +102,7 @@ function Book({book, ...props}) {
     pathname: `/books/${id}`,
   };
 
-
-
+  
   return (
     <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
     <div class="p-5">
