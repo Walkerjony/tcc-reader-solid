@@ -89,11 +89,15 @@ function Book({book, ...props}) {
   const { title } = book.volumeInfo;
   const  description  = book.volumeInfo.description;
   const publishedDate = book.volumeInfo.publishedDate;
-  const image = book.volumeInfo.imageLinks?.thumbnail
-  const  authors  = [book.volumeInfo.authors];
+  const image = book.volumeInfo.imageLinks?.thumbnail || 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fe1.pxfuel.com%2Fdesktop-wallpaper%2F42%2F788%2Fdesktop-wallpaper-error-black-404-page-not-found-thumbnail.jpg&tbnid=Zoww5uo89UlIHM&vet=12ahUKEwjSj__nqfP-AhW9pZUCHTTKAAIQMygCegQIARBE..i&imgrefurl=https%3A%2F%2Fwww.pxfuel.com%2Fen%2Fquery%3Fq%3D404%2Berror&docid=FyYiceUtDADdeM&w=350&h=757&q=not%20found%20dark%20vertical%20image&client=opera-gx&ved=2ahUKEwjSj__nqfP-AhW9pZUCHTTKAAIQMygCegQIARBE';
+  const pages = book.volumeInfo.pageCount
+  const authors  = [book.volumeInfo.authors];
+  const epub = book.saleInfo.isEbook
+
+
 
   const showInfo = (props) => {
-    navigate(`/books/${id}`, {state: { title, authors, description, publishedDate,  } })
+    navigate(`/books/${id}`, {state: { title, authors, description, publishedDate, image, pages, epub  } })
     console.log(book)
     console.log(title)
   }
@@ -104,18 +108,24 @@ function Book({book, ...props}) {
 
   
   return (
-    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div class="max-w-sm bg-white border border-gray-200 rounded-lg">
     <div class="p-5">
         <a href="#">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{title}</h5>
         </a>
-        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{authors.join("-")}</p>
-        <A href = {linkTo.pathname} onclick={showInfo} class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Read more
-            <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-        </A>
+        <figure class="relative max-w-sm transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0">
+            <a href="#">
+              <img class="h-96 w-50 rounded-lg" src = {image}  alt="image description"> </img>
+            </a>
+            <figcaption class="absolute px-4 text-lg text-white bottom-6">
+                <p class="mb-3 text-xl font-semibold text-white-600/100 dark:text-white-500/100 max-h-screen overflow-auto">{title}</p>
+                <A href = {linkTo.pathname} onclick={showInfo} class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Read more
+           </A>
+            </figcaption>
+          </figure>  
     </div>
 </div>
+
   );
 }
 export default SearchBooks;
