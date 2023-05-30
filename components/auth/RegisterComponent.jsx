@@ -1,17 +1,32 @@
-import { supabase } from "/src/supabaseClient";
-
+import { createSignal } from 'solid-js'
+import axios from 'axios';
+import { useNavigate } from '@solidjs/router';
 function RegisterComponent(){
+  const navigate = useNavigate();
+  const [username, setUsername] = createSignal('');
+  const [email, setEmail] = createSignal('');
+  const [password, setPassword] = createSignal('')
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const { username, email, password } = event.target.elements;
-    const { data, error } = await supabase.from('users').insert([{ username: username.value, email: email.value, password: password.value }]);
-    if (error) {
-      console.log(error);
-    } else {
-      console.log(data);
-    }
-  }
+  const handleSubmit = async (e) => {
+   e.preventDefault();
+   await axios
+   .post("http://localhost:8001/signup-user", {
+     username: username(),
+     email: email(),
+     password: password(),
+   })
+   .then((response) => {
+     console.log(response.data);
+     if (response.data.error) {
+       alert("Email ja cadastrado!");
+     } else {
+       alert("Cadastrado com sucesso");
+       navigate("/");
+     }
+   })
+   .catch((error) => console.log(error.response.data));
+};
+  
 
     return(
         <section class="bg-center bg-no-repeat bg-[url('https://media.thegospelcoalition.org/wp-content/uploads/2023/04/04185025/build-theological-library-1920x1080.jpg')] bg-gray-700 bg-blend-multiply">
@@ -29,19 +44,19 @@ function RegisterComponent(){
        <div>
         <label for="text" class="block text-sm font-medium leading-6 text-white">Nome de usuário</label>
         <div class="mt-2">
-          <input id="username" name="username" type="text" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></input>
+          <input value={username()} onChange={(e) => setUsername(e.target.value)} id="username" name="username" type="text" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></input>
         </div>
       </div>
       <div>
         <label for="email" class="block text-sm font-medium leading-6 text-white">E-mail</label>
         <div class="mt-2">
-          <input id="email" name="email" type="email" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></input>
+          <input value={email()} onChange={(e) => setEmail(e.target.value)} id="email" name="email" type="email" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></input>
         </div>
       </div>
       <div>
           <label for="password" class="block text-center text-sm font-medium leading-6 text-white">Senha</label>
         <div class="mt-2">
-          <input id="password" name="password" type="password" autocomplete="current-password" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"> </input>
+          <input value={password()} onChange={(e) => setPassword(e.target.value)} id="password" name="password" type="password" autocomplete="current-password" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"> </input>
         </div>
       </div>
 
