@@ -56,12 +56,9 @@ exports.signUpUser = async (req, res) => {
 }
 
 exports.userLogin = async (req, res) => {
-    const { username, email, password } = req.body
+    const { email, password } = req.body
 
-    //Validações
-    if(!username){
-        return res.status(422).json({ msg: "Username Obrigatório"})
-    }
+  
 
     if(!email){
         return res.status(422).json({ msg: "O email é obrigatório!"})
@@ -86,13 +83,9 @@ exports.userLogin = async (req, res) => {
     if(!checkPassword){
         return res.status(422).json({ msg: "Senhas inválida!"})
     }
-
     try {
-        const token = jwt.sign({
-            id: user.id
-        })
-
-        res.status(200).json({ msg: "Autenticação realizada com sucesso", token})
+   
+        res.status(200).json({ msg: "Autenticação realizada com sucesso"})
     } catch (error) {
         res.status(400).json({ msg: error.message })
     }
