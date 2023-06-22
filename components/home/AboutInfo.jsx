@@ -12,7 +12,7 @@ function About ()  {
         onSwiper={(swiper) => console.log(swiper)}
       >
         <SwiperSlide>
-          <h1 class='text-center font-bold text-dark text-4xl'>What is ReadER?</h1> <br />
+          <h1 class='text-center font-bold text-dark text-4xl'>O que é o Reader?</h1> <br />
           <p class='text-center font-bold text-dark text-lg'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus quaerat eveniet </p>      
         </SwiperSlide>
         

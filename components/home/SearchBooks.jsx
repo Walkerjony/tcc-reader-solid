@@ -27,7 +27,7 @@ function SearchBooks() {
         <div className="container mx-auto dark:bg-gray-900 rounded-lg p-14">
         <form onSubmit={handleSubmit}>
           <h1 className="text-center font-bold text-white text-4xl">
-            Find your perfect books{" "}
+            Encontre seus livros preferidos{" "}
           </h1>{" "}
           <br />
           <div className="sm:flex items-center bg-white rounded-lg overflow-hidden px-2 py-1 justify-between">
@@ -40,7 +40,7 @@ function SearchBooks() {
             />
             <div className="ms:flex items-center px-2 rounded-lg space-x-4 mx-auto ">
               <button className="dark:bg-gray-900 text-white text-base rounded-lg px-4 py-2 font-thin">
-                Search
+                Procurar
               </button>
             </div>
           </div>
@@ -93,11 +93,13 @@ function Book({book, ...props}) {
   const pages = book.volumeInfo.pageCount
   const authors  = [book.volumeInfo.authors];
   const epub = book.saleInfo.isEbook
+  const categories = [book.volumeInfo.categories] || 'Nao encontrado';
+
 
 
 
   const showInfo = (props) => {
-    navigate(`/books/${id}`, {state: { title, authors, description, publishedDate, image, pages, epub  } })
+    navigate(`/books/${id}`, {state: { title, authors, description, publishedDate, image, pages, epub, categories  } })
     console.log(book)
     console.log(title)
   }
@@ -119,7 +121,7 @@ function Book({book, ...props}) {
             <figcaption class="absolute px-4 text-lg text-white bottom-6">
                 <p class="mb-3 text-xl font-semibold text-white-600/100 dark:text-white-500/100 max-h-screen overflow-auto">{title}</p>
                 <A href = {linkTo.pathname} onclick={showInfo} class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                Read more
+                Ver Mais
                </A>
             </figcaption>
           </figure>  

@@ -90,3 +90,23 @@ exports.userLogin = async (req, res) => {
         res.status(400).json({ msg: error.message })
     }
 }
+
+exports.updateUser = async (req, res) => {
+    const { username } = req.body
+    try {
+        const product = await prisma.product.update({
+            where: {
+                id: Number(req.params.id),
+            },
+            data: {
+                username: username,
+            },
+        })
+}catch(error){
+    console.log(error)
+ }
+}
+
+
+    
+    

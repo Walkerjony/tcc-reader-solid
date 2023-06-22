@@ -54,7 +54,7 @@ function Cards() {
                   />
                 </svg>
 
-                <p class="ml-2 text-sm">Author Name</p>
+                <p class="ml-2 text-sm">Tolkien / J.K. Rowling / G.R.R Martin</p>
               </a>
               <a
                 class="no-underline text-grey-darker hover:text-red-dark"

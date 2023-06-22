@@ -23,8 +23,8 @@ export default function userLogin() {
     setTimeout(() => {
       setToast(false);
     }, 3000);
-  };
-
+  }; 
+  
   const handleLogin = async (e) => {
     e.preventDefault();
     await axios
@@ -33,10 +33,10 @@ export default function userLogin() {
         password: password(),
       })
       .then(() => {
-       navigate('/')
+       navigate('/');
       })
       .catch((error) => {
-       console.log(error)
+       console.log(error);
       });
   }
   return (

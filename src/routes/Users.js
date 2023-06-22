@@ -2,11 +2,10 @@ const express = require('express')
 const router = express.Router()
 
 const userController = require('../controller/UserControler')
+const ActionsController = require('../controller/ActionsController')
 
-// Cadastro do cliente
 router.post('/signup-user', userController.signUpUser)
-
-// Login do cliente
+router.post('/like-book', ActionsController.likePost)
 router.post('/login-user', userController.userLogin)
 
 
