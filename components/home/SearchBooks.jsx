@@ -99,7 +99,7 @@ function Book({book, ...props}) {
 
 
   const showInfo = (props) => {
-    navigate(`/books/${id}`, {state: { title, authors, description, publishedDate, image, pages, epub, categories  } })
+    navigate(`/books/${id}`, {state: {id, title, authors, description, publishedDate, image, pages, epub, categories  } })
     console.log(book)
     console.log(title)
   }

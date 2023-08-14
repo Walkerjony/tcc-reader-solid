@@ -1,24 +1,25 @@
 const { PrismaClient } = require('@prisma/client');
+const axios = require('axios')
 const prisma = new PrismaClient();
 
 exports.likePost =  async (req, res) => {
-  const { userId, postId } = req.body;
+  const { bookId } = req.body;
+  
+  console.log(req.body)
   try {
-    const existingLike = await prisma.like.findUnique({
-      where: { userId_postId: { userId, postId } },
+    const response = await axios.get(`https://www.googleapis.com/books/v1/volumes/${bookId}`);
+    const bookData = response.data;
+
+    const book = await prisma.book.create({
+      data: {
+        id: bookData.volumeInfo.id,
+        likeCount: 0,
+      },
     });
 
-    if (existingLike) {
-      res.status(400).json({ message: 'You have already liked this post.' });
-      return;
-    }
-
-    const newLike = await prisma.like.create({
-      data: { userId, postId },
-    });
-
-    res.status(201).json(newLike);
+    res.status(201).json(book);
   } catch (error) {
-    res.status(500).json({ message: 'An error occurred while liking the post.' });
+    console.error(error);
+    res.status(500).json({ message: 'Failed to create book', error });
   }
 };

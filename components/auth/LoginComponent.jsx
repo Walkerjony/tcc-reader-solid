@@ -2,6 +2,8 @@ import { createSignal } from 'solid-js'
 import toast, { Toaster } from 'solid-toast';
 import axios from 'axios';
 import { useNavigate } from '@solidjs/router'
+
+
 export default function userLogin() {
 
   const [email, setEmail] = createSignal('');
@@ -33,7 +35,7 @@ export default function userLogin() {
         password: password(),
       })
       .then(() => {
-       navigate('/');
+        navigate('/');
       })
       .catch((error) => {
        console.log(error);

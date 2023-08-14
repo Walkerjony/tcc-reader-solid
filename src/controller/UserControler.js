@@ -1,7 +1,6 @@
 const  { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient()
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
 
 
 exports.signUpUser = async (req, res) => {
@@ -45,20 +44,17 @@ exports.signUpUser = async (req, res) => {
                 username,
                 email,
                 password: hasspassword,
-            }
+            } 
         })
-       
+    
         res.status(201).json(user).send({status: "ok"})
     } catch (error) {
-        res.status(400).send({ status: "error" })
+        res.status(400).send({ status: "error" }, error)
     }
-
 }
 
 exports.userLogin = async (req, res) => {
     const { email, password } = req.body
-
-  
 
     if(!email){
         return res.status(422).json({ msg: "O email é obrigatório!"})
@@ -69,28 +65,43 @@ exports.userLogin = async (req, res) => {
 
     const user = await prisma.user.findUnique({
         where: {
-            email: email
+            email
         }
     })
-
+    
+    
+    
     if(!user) {
         return res.status(404).json({ msg: "Usuario não encontrado!"})
     }
-
-    // Checar se as senhas conferem
+    
     const checkPassword = await bcrypt.compare(password, user.password)
 
     if(!checkPassword){
         return res.status(422).json({ msg: "Senhas inválida!"})
     }
+
+    req.session.user = user;
+    console.log(req.session.user)
+
     try {
-   
+        req.session.loggedin = true  
         res.status(200).json({ msg: "Autenticação realizada com sucesso"})
     } catch (error) {
         res.status(400).json({ msg: error.message })
     }
 }
 
+
+exports.getUser = async (req, res) => {  
+        const ses = req.session.user 
+        try{
+            console.log(ses)
+        }catch(error){
+            console.log(error)
+        }
+  };
+  
 exports.updateUser = async (req, res) => {
     const { username } = req.body
     try {
