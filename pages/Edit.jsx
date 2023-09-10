@@ -1,7 +1,7 @@
-import EditComponent from "../components/EditInfo/EditComponent"
+import EditProfile from "../components/EditInfo/EditProfile"
 
 function Edit() {
 return(
-      <EditComponent />
+      <EditProfile />
 )
 }export default Edit

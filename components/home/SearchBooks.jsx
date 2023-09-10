@@ -1,6 +1,7 @@
 import axios from "axios";
-import { createSignal } from "solid-js";
+import { createSignal, onMount } from "solid-js";
 import { useNavigate, A } from "@solidjs/router";
+import Header from "/components/home/Header";
 import BookInfo from "/components/ShowBook/BookInfo";
 
 function SearchBooks() {
@@ -22,13 +23,39 @@ function SearchBooks() {
       console.error('Error occurred:', error.message || error);
     }    
   };
+
+  const [isLoggedIn, setIsLoggedIn] = createSignal(false);
+  const [userId, setUserId] = createSignal('');
+
+  onMount(async () => {
+    try {
+      //const response = await axios.get('http://localhost:8001/user');
+      //const dataSession = response.data.ses;
+      //console.log(dataSession.user);
+      const user = localStorage.getItem("user")
+      if(user){
+      setUserId(localStorage.getItem("user"))
+      setIsLoggedIn(true);    
+    }
+      else{
+        setUserId(localStorage.getItem("user"))
+        setIsLoggedIn(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    
+  })
   return (
-      <div className="w-full mt-10 bg-gray-100 flex flex-col items-center">
-        <div className="container mx-auto dark:bg-gray-900 rounded-lg p-14">
+    <>
+    <Header/>
+
+    <section class="bg-no-repeat bg-cover bg-[url('https://media.thegospelcoalition.org/wp-content/uploads/2023/04/04185025/build-theological-library-1920x1080.jpg')] bg-gray-700 bg-blend-multiply">
+      <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
+
+        <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Procure seus Livros</h1>
+        <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">Milhares de livros e gêneros a sua disposição</p>
         <form onSubmit={handleSubmit}>
-          <h1 className="text-center font-bold text-white text-4xl">
-            Encontre seus livros preferidos{" "}
-          </h1>{" "}
           <br />
           <div className="sm:flex items-center bg-white rounded-lg overflow-hidden px-2 py-1 justify-between">
             <input
@@ -45,8 +72,8 @@ function SearchBooks() {
             </div>
           </div>
         </form>
-        </div>
-        <div className="flex flex-wrap justify-center gap-4 p-4">
+      </div>
+            <div className="flex flex-wrap justify-center gap-4 p-2">
           {books().map((book) => (
             <>
             <Book book={book}/>
@@ -75,8 +102,9 @@ function SearchBooks() {
             padding: 1rem;
           }
         `}
-      </style>
-    </div>
+      </style>            
+</section>
+    </>
     );
 }
 
@@ -114,7 +142,7 @@ function Book({book, ...props}) {
     <div class="p-5">
         <a href="#">
         </a>
-        <figure class="relative max-w-sm transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0">
+        <figure class="relative max-w-sm">
             <a href="#">
               <img class="h-96 w-50 rounded-lg" src = {image}  alt="image description"> </img>
             </a>

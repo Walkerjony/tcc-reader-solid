@@ -14,6 +14,7 @@ function App() {
      <Route path={"/login"} component={Login}></Route>
      <Route path={"/edit"} component={Edit}></Route>
      <Route path={"/register"} component={Register}></Route>
+     <Route path={"/edit/:id"} component={Edit}></Route>
      <Route path={"/books/:id"} component={ShowBooks}></Route>
     </Routes>
   );

@@ -12,8 +12,6 @@ model book {
   userId      Int?
   likeCount   Int
   user        user?     @relation(fields: [userId], references: [id], map: "Book_userId_fkey")
-  comment     comment[]
-  like        like[]
 
   @@index([userId], map: "Book_userId_fkey")
 }
@@ -21,23 +19,15 @@ model book {
 model comment {
   id        Int      @id @default(autoincrement())
   content   String
-  userId    Int
-  bookId    Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime
-  book      book     @relation(fields: [bookId], references: [id], map: "Comment_bookId_fkey")
-  user      user     @relation(fields: [userId], references: [id], map: "Comment_userId_fkey")
-
+  username  String
+  bookId    String
   @@index([bookId], map: "Comment_bookId_fkey")
-  @@index([userId], map: "Comment_userId_fkey")
 }
 
 model like {
   id     Int  @id @default(autoincrement())
   userId Int
   bookId Int
-  book   book @relation(fields: [bookId], references: [id], map: "Like_bookId_fkey")
-  user   user @relation(fields: [userId], references: [id], map: "Like_userId_fkey")
 
   @@index([bookId], map: "Like_bookId_fkey")
   @@index([userId], map: "Like_userId_fkey")
@@ -46,9 +36,11 @@ model like {
 model user {
   id       Int       @id @default(autoincrement())
   email    String    @unique(map: "User_email_key")
+  name     String
   username String
+  aboutYou String
   password String
   book     book[]
-  comment  comment[]
-  like     like[]
 }
+
+

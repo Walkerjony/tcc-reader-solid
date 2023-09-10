@@ -1,15 +1,27 @@
 const  { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient()
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+const multer = require('multer');
+
 
 
 exports.signUpUser = async (req, res) => {
+
+  
+  
+    
     const {
-        id,
+        name,
         username,
         email,
+        aboutYou,
         password,
     } = req.body
+    
+
+
+    console.log("dados", req.body);
+
 
     // Validações
     if(!username){
@@ -40,21 +52,27 @@ exports.signUpUser = async (req, res) => {
     try {
         const user = await prisma.user.create({
             data: {
-                id,
+                name,
                 username,
                 email,
+                aboutYou,
                 password: hasspassword,
             } 
         })
-    
-        res.status(201).json(user).send({status: "ok"})
+        res.status(201).send(user).send({status: "ok"})
     } catch (error) {
-        res.status(400).send({ status: "error" }, error)
+        res.status(400).json(error)
+        console.log(error)
     }
 }
 
 exports.userLogin = async (req, res) => {
-    const { email, password } = req.body
+    const { username, email, password } = req.body
+
+
+    if(!username){
+        return res.status(422).json({ msg: "O Username é obrigatório!"})
+    }
 
     if(!email){
         return res.status(422).json({ msg: "O email é obrigatório!"})
@@ -81,41 +99,63 @@ exports.userLogin = async (req, res) => {
         return res.status(422).json({ msg: "Senhas inválida!"})
     }
 
-    req.session.user = user;
-    console.log(req.session.user)
+    req.session.user = user.username;
+    req.session.name = user.name
+    req.session.userId = user.id
+    
 
-    try {
+    console.log(req.session.user)
+    console.log(req.session.name)
+    console.log(req.session.userId)
+        try {
         req.session.loggedin = true  
-        res.status(200).json({ msg: "Autenticação realizada com sucesso"})
+        res.status(200).json({ msg: "Autenticação realizada com sucesso", user:req.session.user, name:req.session.name})
     } catch (error) {
         res.status(400).json({ msg: error.message })
+    }
+}   
+
+
+exports.getUser = async (req, res) => {
+    try {
+        const response = await prisma.user.findMany()
+        res.status(200).json(response)
+    } catch (error) {
+        res.status(500).json({ msg: error.message })
     }
 }
 
 
-exports.getUser = async (req, res) => {  
-        const ses = req.session.user 
-        try{
-            console.log(ses)
-        }catch(error){
-            console.log(error)
-        }
-  };
-  
-exports.updateUser = async (req, res) => {
-    const { username } = req.body
+exports.getUserById = async (req, res) => {  
     try {
-        const product = await prisma.product.update({
+        const response = await prisma.user.findUnique({
             where: {
-                id: Number(req.params.id),
-            },
-            data: {
-                username: username,
+                id: Number(req.params.id)
             },
         })
-}catch(error){
-    console.log(error)
- }
+        res.status(200).json(response)
+    } catch (error) {
+        res.status(404).json({ msg: error.message })
+    }
+}
+  
+  exports.updateUser = async (req, res) => {
+    const { name, username, aboutYou } = req.body
+    try {
+        const user = await prisma.user.update({
+            where: {
+                id: Number(req.params.id)
+            },
+            data: {
+                name: name,
+                username: username,
+                aboutYou: aboutYou
+            },
+        })
+        res.status(200).json(user)
+    } catch (error) {
+        res.status(400).json({ msg: error.message })
+    }
 }
 
 

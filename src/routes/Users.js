@@ -7,7 +7,8 @@ const ActionsController = require('../controller/ActionsController')
 router.post('/signup-user', userController.signUpUser)
 router.post('/like-book', ActionsController.likePost)
 router.post('/login-user', userController.userLogin)
-router.get('/user', userController.getUser)
-
-
+router.post('/update-user/:id', userController.updateUser)
+router.get('/getUser/:id', userController.getUserById)
+router.get('/getUser', userController.getUser)
+  
 module.exports = router
