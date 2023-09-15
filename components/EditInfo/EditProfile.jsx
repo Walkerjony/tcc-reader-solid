@@ -33,12 +33,25 @@ createEffect(() => {
         setUserId('');
         setIsLoggedIn(false);
       }
-      const username = localStorage.getItem("user");
+      const usernameUser = localStorage.getItem("user");
+      const nameUser = localStorage.getItem("name");
+      const aboutYouUser = localStorage.getItem("aboutyou");
+
       if (username !== undefined) {
-        setUsername(username);
+        setUsername(usernameUser);
         setIsLoggedIn(true);
       } else {
         setUsername('');
+      }
+      if (name !== undefined) {
+        setName(nameUser);
+      } else {
+        setName('');
+      }
+      if (aboutYou !== undefined) {
+        setAboutYou(aboutYouUser);
+      } else {
+        setAboutYou('');
       }
     } catch (error) {
       console.log(error);
@@ -55,8 +68,9 @@ createEffect(() => {
       });
       console.log(response.data);
       if (response.data.error) {
-        alert('Email já cadastrado!');
+        alert('Erro!');
       } else {
+        localStorage.setItem("username", res.data.user);
         alert('Editado');
         navigate('/');
       }
@@ -76,7 +90,7 @@ createEffect(() => {
           <div class="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
               <div class="sm:col-span-2">
                   <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seu Nome</label>
-                  <input  value={name()}
+                  <input  
                          onchange={(e) => setName(e.target.value)} type="text" name="name" id="name"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  placeholder="Type product name" required=""/>
               </div>
               <div class="w-full">
@@ -110,7 +124,17 @@ createEffect(() => {
       <h2 class="mb-2 text-xl font-semibold leading-none text-gray-900 md:text-2xl dark:text-white">Suas informações</h2>
       <dl>
           <dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Sobre você</dt>
-          <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">Standard glass ,3.8GHz 8-core 10th-generation Intel Core i7 processor, Turbo Boost up to 5.0GHz, 16GB 2666MHz DDR4 memory, Radeon Pro 5500 XT with 8GB of GDDR6 memory, 256GB SSD storage, Gigabit Ethernet, Magic Mouse 2, Magic Keyboard - US.</dd>
+          <dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">
+          {isLoggedIn() ? (
+                <>
+                <div class="flex items-center">
+                  <h1 class="mr-2">{aboutYou()}  </h1>
+                </div>
+                </>
+              ) : (
+                <h1> Registrar-se</h1>
+              )}
+              </dd>
       </dl>
       <dl class="flex items-center space-x-6">
           <div>
@@ -119,7 +143,7 @@ createEffect(() => {
               {isLoggedIn() ? (
                 <>
                 <div class="flex items-center">
-                  <h1 class="mr-2">{userId()}  </h1>
+                  <h1 class="mr-2">{username()}  </h1>
                 </div>
                 </>
               ) : (
@@ -132,7 +156,7 @@ createEffect(() => {
               {isLoggedIn() ? (
                 <>
                 <div class="flex items-center">
-                  <h1 class="mr-2">{username()}  </h1>
+                  <h1 class="mr-2">{name()}  </h1>
                 </div>
                 </>
               ) : (

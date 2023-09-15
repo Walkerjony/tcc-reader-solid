@@ -115,19 +115,22 @@ function Book({book, ...props}) {
   const navigate = useNavigate();
   const { id } = book;
   const { title } = book.volumeInfo;
+  const idioma = book.volumeInfo.language	
+  const rating = book.volumeInfo.averageRating;
   const  description  = book.volumeInfo.description;
+  const data = book.volumeInfo.publishedDate
+  const sales = book.saleInfo.buyLink
+  const editora = book.volumeInfo.publisher
   const publishedDate = book.volumeInfo.publishedDate;
   const image = book.volumeInfo.imageLinks?.thumbnail || 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fe1.pxfuel.com%2Fdesktop-wallpaper%2F42%2F788%2Fdesktop-wallpaper-error-black-404-page-not-found-thumbnail.jpg&tbnid=Zoww5uo89UlIHM&vet=12ahUKEwjSj__nqfP-AhW9pZUCHTTKAAIQMygCegQIARBE..i&imgrefurl=https%3A%2F%2Fwww.pxfuel.com%2Fen%2Fquery%3Fq%3D404%2Berror&docid=FyYiceUtDADdeM&w=350&h=757&q=not%20found%20dark%20vertical%20image&client=opera-gx&ved=2ahUKEwjSj__nqfP-AhW9pZUCHTTKAAIQMygCegQIARBE';
   const pages = book.volumeInfo.pageCount
   const authors  = [book.volumeInfo.authors];
-  const epub = book.saleInfo.isEbook
+  const preview = book.volumeInfo.previewLink
   const categories = [book.volumeInfo.categories] || 'Nao encontrado';
 
 
-
-
   const showInfo = (props) => {
-    navigate(`/books/${id}`, {state: {id, title, authors, description, publishedDate, image, pages, epub, categories  } })
+    navigate(`/books/${id}`, {state: {id, title, data, editora, sales, authors, rating, idioma, description, publishedDate, image, pages, preview, categories  } })
     console.log(book)
     console.log(title)
   }

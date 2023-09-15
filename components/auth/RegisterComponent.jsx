@@ -1,6 +1,4 @@
 
-
-
 import { createSignal } from 'solid-js';
 import axios from 'axios';
 import { useNavigate } from '@solidjs/router';
@@ -25,19 +23,20 @@ function RegisterComponent() {
         email: email(),
         aboutYou: aboutYou(),
         password: password(),     
-      });
-
-      console.log(response.data);
-      if (response.data.error) {
-        alert('Email já cadastrado!');
-      } else {
-        alert('Cadastrado com sucesso');
+      }).then((res) => {
+        console.log(res.data)
+        localStorage.setItem("user", res.data.user);
+        localStorage.setItem("name", res.data.name);
+        localStorage.setItem("aboutyou", res.data.aboutYou)
+        localStorage.setItem("id", res.data.id)
         navigate('/');
-      }
-    } catch (error) {
-      console.error(error);
-    }
+      }); 
+
+     
+  }catch(error){
+    console.log(error);
   };
+ }
 
   return (
     <section class="bg-no-repeat bg-cover bg-[url('https://images.unsplash.com/photo-1502485019198-a625bd53ceb7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8ZGFyayUyMGxpYnJhcnl8ZW58MHx8MHx8fDA%3D&w=1000&q=80')]">
@@ -108,6 +107,4 @@ function RegisterComponent() {
     </div>
   </section>
   );
-}
-
-export default RegisterComponent;
+}  export default RegisterComponent;

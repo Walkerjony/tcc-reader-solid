@@ -101,7 +101,6 @@ exports.userLogin = async (req, res) => {
 
     req.session.user = user.username;
     req.session.name = user.name
-    req.session.userId = user.id
     
 
     console.log(req.session.user)

@@ -38,7 +38,6 @@ export default function userLogin() {
         password: password(),
       }).then(response => {
         console.log(response.data)
-        localStorage.setItem("user",response.data.user);
         navigate('/');
       })
   }

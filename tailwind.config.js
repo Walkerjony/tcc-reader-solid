@@ -14,6 +14,11 @@ module.exports = {
         'bubble-gum': '#ff77e9',
         'bermuda': '#78dcca',
       },
+      fontFamily: {
+        'montserrat': ['Montserrat'],
+        'lato': ['Lato'],
+        'garamond': ['Garamond']
+      }
     },
   },
   variants: {},

@@ -7,17 +7,20 @@ function Header() {
   const [isLoggedIn, setIsLoggedIn] = createSignal(false);
   const [userId, setUserId] = createSignal('');
   const navigate = useNavigate()
+  const id = localStorage.getItem("id");
 
   const fetchUser = async () => {
-    axios.get(`http://localhost:8001/getUser`)
+    axios.get(`http://localhost:8001/getUserById/${id}`)
       .then((res) => {
         console.log(res)
+        console.log(id)
+        navigate(`edit/${id}`)
       })
 }
 
-  onMount(async () => {
+onMount(async () => {
     try {
-      const user = localStorage.getItem("user");
+      const user = localStorage.getItem("name");
       if (user) {
         setUserId(user);
         setIsLoggedIn(true);
