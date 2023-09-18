@@ -24,14 +24,10 @@ function Cards() {
                 >
                   {" "}
                   <br />
-                  Adventure and Fiction
+                  Aventura e Ficção
                 </p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
-                molestias debitis nihil dolore aspernatur! Vitae molestias ipsum
-                maiores laboriosam veritatis dignissimos dolore aperiam, nihil
-                libero. Temporibus vel culpa dolor reiciendis?
+                Prepare-se para embarcar em jornadas emocionantes ao lado de aventureiros destemidos. Explore antigas ruínas em busca de tesouros perdidos, participe de batalhas épicas contra forças das trevas e desvende segredos ocultos que mudarão o curso da história. Nossos autores talentosos criaram histórias que farão o seu coração acelerar e a sua mente se perder em mundos de maravilha e perigo.
               </h1>
-              <p class="text-grey-darker text-sm">11/1/19</p>
             </header>
 
             <footer class="flex items-center justify-between duration-500 hover:scale-105 hover:shadow-xl leading-none p-2 md:p-4">
@@ -87,12 +83,9 @@ function Cards() {
                 >
                   {" "}
                   <br />
-                  Philosophy and the search for the truth
+                  Filosofia
                 </p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
-                molestias debitis nihil dolore aspernatur! Vitae molestias ipsum
-                maiores laboriosam veritatis dignissimos dolore aperiam, nihil
-                libero. Temporibus vel culpa dolor reiciendis?
+                Se você é um estudante ávido de filosofia, um curioso explorador de ideias ou alguém que busca respostas para perguntas profundas, esta seção de Filosofia oferece um oceano de conhecimento para navegar. Descubra as teorias que influenciaram a cultura, a política e a moral, e desafie seu próprio pensamento enquanto mergulha nas mentes dos maiores filósofos da história.
               </h1>
             </header>
 
@@ -115,7 +108,7 @@ function Cards() {
                     d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
                   />
                 </svg>
-                <p class="ml-2 text-sm">Aristoteles / Plato / Socrates</p>
+                <p class="ml-2 text-sm">Aristoteles / Platão / Socrates</p>
               </a>
               <p
                 class="no-underline text-grey-darker hover:text-red-dark"
@@ -148,12 +141,9 @@ function Cards() {
                 >
                   {" "}
                   <br />
-                  Economics
+                  Economia
                 </p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
-                molestias debitis nihil dolore aspernatur! Vitae molestias ipsum
-                maiores laboriosam veritatis dignissimos dolore aperiam, nihil
-                libero. Temporibus vel culpa dolor reiciendis?
+                Onde o mundo dos números, mercados e finanças se desdobra diante de você. Aqui, você encontrará uma riqueza de conhecimento que o guiará pelo intricado universo da economia, revelando os segredos por trás das decisões financeiras globais e individuais.
               </h1>
             </header>
 
@@ -210,13 +200,10 @@ function Cards() {
                 >
                   {" "}
                   <br />
-                  Poetry
+                  Poesia
                 </p>
-                "We don't read and write poetry because it's cute. We read and
-                write poetry because we are members of the human race. And the
-                human race is filled with passion. And medicine, law, business,
-                engineering, these are noble pursuits and necessary to sustain
-                life."
+                "Não lemos e escrevemos poesia porque é fofo. Lemos e escrevemos poesia porque somos membros da raça humana. E a raça humana está cheia de paixão. E medicina, direito, negócios, engenharia, essas são atividades nobres e necessário para sustentar a vida." - John Keating
+
               </h1>
             </header>
 
@@ -274,12 +261,10 @@ function Cards() {
                 >
                   {" "}
                   <br />
-                  Horror
+                  Terror
                 </p>
                 <p>
-                  “If I am mad, it is mercy! May the gods pity the man who in
-                  his callousness can remain sane to the hideous end!” - H.P
-                  Lovecraft
+                "Erguendo-se das profundezas abissais, uma cidade morta, R'lyeh, com seus monólitos antigos e sua arquitetura incompreensível, emergirá novamente quando as estrelas estiverem certas. E com ela, despertará o grande e terrível Cthulhu." -  H.P Lovecraft
                 </p>
               </h1>
             </header>
@@ -331,10 +316,9 @@ function Cards() {
                 >
                   {" "}
                   <br />
-                  Époque
+                  Época
                 </p>
-                Looking for an exciting story envolving romance, betrayal and/or
-                conflicts?
+                Viaje no tempo e mergulhe em um mundo de elegância, romance e intriga com as nossas obras de época. Nestas páginas, você será transportado para épocas passadas, onde a sociedade é governada por rígidas convenções, os trajes são deslumbrantes, e os segredos escondidos por trás das cortinas são tão fascinantes quanto perigosos.
               </h1>
             </header>
 

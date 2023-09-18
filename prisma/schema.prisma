@@ -9,9 +9,10 @@ datasource db {
 
 model book {
   id          Int       @id @default(autoincrement())
-  userId      Int?
+  userId      String
   likeCount   Int
-  user        user?     @relation(fields: [userId], references: [id], map: "Book_userId_fkey")
+  BookId      String
+
 
   @@index([userId], map: "Book_userId_fkey")
 }
@@ -40,7 +41,6 @@ model user {
   username String
   aboutYou String
   password String
-  book     book[]
 }
 
 

@@ -25,11 +25,11 @@ function RegisterComponent() {
         password: password(),     
       }).then((res) => {
         console.log(res.data)
-        localStorage.setItem("user", res.data.user);
-        localStorage.setItem("name", res.data.name);
+        // localStorage.setItem("user", res.data.user);
+        // localStorage.setItem("name", res.data.name);
         localStorage.setItem("aboutyou", res.data.aboutYou)
         localStorage.setItem("id", res.data.id)
-        navigate('/');
+        navigate('/', setTimeout(2000));
       }); 
 
      
