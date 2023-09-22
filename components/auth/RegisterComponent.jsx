@@ -108,4 +108,3 @@ function RegisterComponent() {
   </section>
   );
 }  export default RegisterComponent;
-

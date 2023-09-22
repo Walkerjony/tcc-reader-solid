@@ -128,7 +128,6 @@ function Book({book, ...props}) {
   const preview = book.volumeInfo.previewLink
   const categories = [book.volumeInfo.categories] || 'Nao encontrado';
 
-
   const showInfo = (props) => {
     navigate(`/books/${id}`, {state: {id, title, data, editora, sales, authors, rating, idioma, description, publishedDate, image, pages, preview, categories  } })
     console.log(book)
