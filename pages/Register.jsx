@@ -1,4 +1,5 @@
-import RegisterComponent from "../components/auth/registerComponent";
+import RegisterComponent from "../components/auth/RegisterComponent";
+
 
 function Register() {
 return(

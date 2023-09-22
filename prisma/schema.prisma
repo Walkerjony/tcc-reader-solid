@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model book {
+  id          Int       @id @default(autoincrement())
+  userId      String
+  likeCount   Int
+  BookId      String
+
+
+  @@index([userId], map: "Book_userId_fkey")
+}
+
+model comment {
+  id        Int      @id @default(autoincrement())
+  content   String
+  username  String
+  bookId    String
+  @@index([bookId], map: "Comment_bookId_fkey")
+}
+
+model like {
+  id     Int  @id @default(autoincrement())
+  userId Int
+  bookId Int
+
+  @@index([bookId], map: "Like_bookId_fkey")
+  @@index([userId], map: "Like_userId_fkey")
+}
+
+model user {
+  id       Int       @id @default(autoincrement())
+  email    String    @unique(map: "User_email_key")
+  name     String
+  username String
+  aboutYou String
+  password String
+}
+
+
