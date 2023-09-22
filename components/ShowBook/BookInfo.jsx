@@ -46,7 +46,6 @@ function BookInfo(props) {
 }
 
   return(
-<<<<<<< HEAD
     <>
     <Header/>
     <section class="bg-white dark:bg-gray-900">
