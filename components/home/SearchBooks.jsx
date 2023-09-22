@@ -125,12 +125,21 @@ function Book({book, ...props}) {
   const image = book.volumeInfo.imageLinks?.thumbnail || 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fe1.pxfuel.com%2Fdesktop-wallpaper%2F42%2F788%2Fdesktop-wallpaper-error-black-404-page-not-found-thumbnail.jpg&tbnid=Zoww5uo89UlIHM&vet=12ahUKEwjSj__nqfP-AhW9pZUCHTTKAAIQMygCegQIARBE..i&imgrefurl=https%3A%2F%2Fwww.pxfuel.com%2Fen%2Fquery%3Fq%3D404%2Berror&docid=FyYiceUtDADdeM&w=350&h=757&q=not%20found%20dark%20vertical%20image&client=opera-gx&ved=2ahUKEwjSj__nqfP-AhW9pZUCHTTKAAIQMygCegQIARBE';
   const pages = book.volumeInfo.pageCount
   const authors  = [book.volumeInfo.authors];
+<<<<<<< HEAD
   const preview = book.volumeInfo.previewLink
   const categories = [book.volumeInfo.categories] || 'Nao encontrado';
 
 
   const showInfo = (props) => {
     navigate(`/books/${id}`, {state: {id, title, data, editora, sales, authors, rating, idioma, description, publishedDate, image, pages, preview, categories  } })
+=======
+  const epub = book.saleInfo.isEbook
+
+
+
+  const showInfo = (props) => {
+    navigate(`/books/${id}`, {state: { title, authors, description, publishedDate, image, pages, epub  } })
+>>>>>>> master
     console.log(book)
     console.log(title)
   }
@@ -145,19 +154,29 @@ function Book({book, ...props}) {
     <div class="p-5">
         <a href="#">
         </a>
+<<<<<<< HEAD
         <figure class="relative max-w-sm">
+=======
+        <figure class="relative max-w-sm transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0">
+>>>>>>> master
             <a href="#">
               <img class="h-96 w-50 rounded-lg" src = {image}  alt="image description"> </img>
             </a>
             <figcaption class="absolute px-4 text-lg text-white bottom-6">
                 <p class="mb-3 text-xl font-semibold text-white-600/100 dark:text-white-500/100 max-h-screen overflow-auto">{title}</p>
                 <A href = {linkTo.pathname} onclick={showInfo} class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+<<<<<<< HEAD
                 Ver Mais
                </A>
+=======
+                Read more
+           </A>
+>>>>>>> master
             </figcaption>
           </figure>  
     </div>
 </div>
+
   );
 }
 export default SearchBooks;
