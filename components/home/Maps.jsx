@@ -17,7 +17,7 @@ function Maps() {
 
         const request = {
           location,
-          radius: 5000, // Adjust the radius as needed
+          radius: 4000, // Adjust the radius as needed
           type: 'book_store' // Specify the type as 'book_store'
         };
 

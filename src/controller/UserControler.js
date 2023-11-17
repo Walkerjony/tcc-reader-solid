@@ -7,9 +7,6 @@ const multer = require('multer');
 
 exports.signUpUser = async (req, res) => {
 
-  
-  
-    
     const {
         name,
         username,
@@ -18,8 +15,6 @@ exports.signUpUser = async (req, res) => {
         password,
     } = req.body
     
-
-
     console.log("dados", req.body);
 
 
@@ -59,7 +54,7 @@ exports.signUpUser = async (req, res) => {
                 password: hasspassword,
             } 
         })
-        res.status(201).send(user).send({status: "ok"})
+        res.status(201).send(user)
     } catch (error) {
         res.status(400).json(error)
         console.log(error)
@@ -105,7 +100,7 @@ exports.userLogin = async (req, res) => {
 
     console.log(req.session.user)
     console.log(req.session.name)
-    console.log(req.session.userId)
+  
         try {
         req.session.loggedin = true  
         res.status(200).json({ msg: "Autenticação realizada com sucesso", user:req.session.user, name:req.session.name})

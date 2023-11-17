@@ -53,6 +53,7 @@ function BookInfo(props) {
         <div class=" font-light p-10 border-solid rounded-md border-b-8 border-sky-500 text-gray-500  ml-40 sm:text-lg dark:text-gray-400">
             <h2 class="mb-4 text-4xl tracking-tight font-extrabold font-montserrat  text-gray-900 dark:text-white">{location.state.title}</h2>
             <p class="mb-4  tracking-tight  font-bold text-gray-900 dark:text-white">Por: {location.state.authors} </p>
+            <p class="mb-4 tracking-tight  font-bold text-gray-900 dark:text-white">Gêneros: {location.state.categories} </p>
             <p class="mb-4  tracking-tight  font-bold text-gray-900 dark:text-white">Publicado em: {location.state.data} </p>
             <p class="mb-4  tracking-tight  font-bold text-gray-900 dark:text-white">Editora: {location.state.editora} </p>
             <p class="mb-4 tracking-tight  font-bold text-gray-900 dark:text-white">Avaliação: {location.state.rating} / 5 </p>
@@ -97,7 +98,7 @@ function BookInfo(props) {
           </svg> 
           <blockquote>
               <p class="first-line:uppercase first-line:tracking-widest
-  first-letter:text-4xl first-letter:font-boldtext-2xl font-montserrat text-gray-900 dark:text-dark ">{location.state.description}</p>
+  first-letter:text-4xl first-letter:font-boldtext-2xl font-montserrat  text-gray-900 dark:text-dark ">{location.state.description}</p>
           </blockquote>
           <hr class="w-48 animate-pulse h-1 mx-auto my-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700"/>
           <figcaption class="flex items-center justify-center mt-6 space-x-3">

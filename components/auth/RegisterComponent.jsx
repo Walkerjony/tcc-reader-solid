@@ -2,6 +2,7 @@
 import { createSignal } from 'solid-js';
 import axios from 'axios';
 import { useNavigate } from '@solidjs/router';
+import toast, { Toaster } from 'solid-toast';
 
 function RegisterComponent() {
   const navigate = useNavigate();
@@ -10,32 +11,37 @@ function RegisterComponent() {
   const [email, setEmail] = createSignal('');
   const [password, setPassword] = createSignal('');
   const [aboutYou, setAboutYou] = createSignal('');
-
+  const notify = () => toast.success('Conta Criada');
+  const erro = () => toast.error('Erro');
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:8001/signup-user' , {
+      const response = await axios.post('http://localhost:8001/signup-user', {
         name: name(),
         username: username(),
         email: email(),
         aboutYou: aboutYou(),
-        password: password(),     
-      }).then((res) => {
-        console.log(res.data)
-        // localStorage.setItem("user", res.data.user);
-        // localStorage.setItem("name", res.data.name);
-        localStorage.setItem("aboutyou", res.data.aboutYou)
-        localStorage.setItem("id", res.data.id)
-        navigate('/', setTimeout(2000));
-      }); 
-
-     
-  }catch(error){
-    console.log(error);
-  };
+        password: password(),
+      });
+    
+      console.log(response.data);
+    
+      localStorage.setItem("aboutyou", response.data.aboutYou);
+      localStorage.setItem("id", response.data.id);
+    
+      // Adicionando um atraso de 2 segundos antes de navegar para '/login'
+      setTimeout(() => {
+        navigate('/login', { replace: true });
+      }, 2000);
+      notify();
+    } catch (error) {
+      erro();
+      console.error(error);
+    }
+    
  }
 
   return (
@@ -50,7 +56,7 @@ function RegisterComponent() {
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                     Criar Conta
                 </h1>
-                <form class="space-y-4 md:space-y-6" onSubmit={handleSubmit} action="#" method='POST'>
+                <form class="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                     <div>
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seu Nome</label>
                         <input type="text"
@@ -84,7 +90,7 @@ function RegisterComponent() {
                     <div>
                         <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sua Senha</label>
                         <input 
-                        type="text" 
+                        type="password" 
                         name="email" 
                         id="password" 
                         value={password()}
@@ -99,7 +105,7 @@ function RegisterComponent() {
                     </div>
                     <button type="submit" class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Criar Conta</button>
                     <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                        Já possui conta? <a href="#" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Entrar Aqui</a>
+                        Já possui conta? <a href="/login" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Entrar Aqui</a>
                     </p>
                 </form>
             </div>
