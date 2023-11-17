@@ -34,6 +34,7 @@
     "jsonwebtoken": "^9.0.0",
     "multer": "^1.4.5-lts.1",
     "mysql": "^2.18.1",
+    "pnpm": "^8.10.5",
     "postcss": "^8.4.21",
     "react-geocode": "^0.2.3",
     "react-hot-toast": "^2.4.1",
