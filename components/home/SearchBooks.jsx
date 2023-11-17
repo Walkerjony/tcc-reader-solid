@@ -125,12 +125,11 @@ function Book({book, ...props}) {
   const image = book.volumeInfo.imageLinks?.thumbnail || 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fe1.pxfuel.com%2Fdesktop-wallpaper%2F42%2F788%2Fdesktop-wallpaper-error-black-404-page-not-found-thumbnail.jpg&tbnid=Zoww5uo89UlIHM&vet=12ahUKEwjSj__nqfP-AhW9pZUCHTTKAAIQMygCegQIARBE..i&imgrefurl=https%3A%2F%2Fwww.pxfuel.com%2Fen%2Fquery%3Fq%3D404%2Berror&docid=FyYiceUtDADdeM&w=350&h=757&q=not%20found%20dark%20vertical%20image&client=opera-gx&ved=2ahUKEwjSj__nqfP-AhW9pZUCHTTKAAIQMygCegQIARBE';
   const pages = book.volumeInfo.pageCount
   const authors  = [book.volumeInfo.authors];
-  
   const preview = book.volumeInfo.previewLink
   const categories = [book.volumeInfo.categories] || 'Nao encontrado';
 
   const showInfo = (props) => {
-    navigate(`/books/${id}`, {state: { title, authors, description, publishedDate, image, pages, epub  } })
+    navigate(`/books/${id}`, {state: {id, title, data, editora, sales, authors, rating, idioma, description, publishedDate, image, pages, preview, categories  } })
     console.log(book)
     console.log(title)
   }
@@ -154,7 +153,6 @@ function Book({book, ...props}) {
                 <A href = {linkTo.pathname} onclick={showInfo} class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 Ver Mais
                </A>
-
             </figcaption>
           </figure>  
     </div>

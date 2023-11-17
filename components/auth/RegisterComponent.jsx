@@ -2,6 +2,7 @@
 import { createSignal } from 'solid-js';
 import axios from 'axios';
 import { useNavigate } from '@solidjs/router';
+import toast, { Toaster } from 'solid-toast';
 
 function RegisterComponent() {
   const navigate = useNavigate();
@@ -10,32 +11,37 @@ function RegisterComponent() {
   const [email, setEmail] = createSignal('');
   const [password, setPassword] = createSignal('');
   const [aboutYou, setAboutYou] = createSignal('');
-
+  const notify = () => toast.success('Conta Criada');
+  const erro = () => toast.error('Erro');
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:8001/signup-user' , {
+      const response = await axios.post('http://localhost:8001/signup-user', {
         name: name(),
         username: username(),
         email: email(),
         aboutYou: aboutYou(),
-        password: password(),     
-      }).then((res) => {
-        console.log(res.data)
-        // localStorage.setItem("user", res.data.user);
-        // localStorage.setItem("name", res.data.name);
-        localStorage.setItem("aboutyou", res.data.aboutYou)
-        localStorage.setItem("id", res.data.id)
-        navigate('/', setTimeout(2000));
-      }); 
-
-     
-  }catch(error){
-    console.log(error);
-  };
+        password: password(),
+      });
+    
+      console.log(response.data);
+    
+      localStorage.setItem("aboutyou", response.data.aboutYou);
+      localStorage.setItem("id", response.data.id);
+    
+      // Adicionando um atraso de 2 segundos antes de navegar para '/login'
+      setTimeout(() => {
+        navigate('/login', { replace: true });
+      }, 2000);
+      notify();
+    } catch (error) {
+      erro();
+      console.error(error);
+    }
+    
  }
 
   return (
@@ -50,7 +56,7 @@ function RegisterComponent() {
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                     Criar Conta
                 </h1>
-                <form class="space-y-4 md:space-y-6" onSubmit={handleSubmit} action="#" method='POST'>
+                <form class="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                     <div>
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Seu Nome</label>
                         <input type="text"
@@ -84,7 +90,7 @@ function RegisterComponent() {
                     <div>
                         <label for="" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sua Senha</label>
                         <input 
-                        type="text" 
+                        type="password" 
                         name="email" 
                         id="password" 
                         value={password()}
@@ -99,7 +105,7 @@ function RegisterComponent() {
                     </div>
                     <button type="submit" class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Criar Conta</button>
                     <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                        Já possui conta? <a href="#" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Entrar Aqui</a>
+                        Já possui conta? <a href="/login" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Entrar Aqui</a>
                     </p>
                 </form>
             </div>
@@ -108,52 +114,3 @@ function RegisterComponent() {
   </section>
   );
 }  export default RegisterComponent;
-function RegisterComponent(){
-    return(
-        <section class="bg-center bg-no-repeat bg-[url('https://media.thegospelcoalition.org/wp-content/uploads/2023/04/04185025/build-theological-library-1920x1080.jpg')] bg-gray-700 bg-blend-multiply">
-        <div class="px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-56">
-            <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
-            <div class="flex min-h-full  flex-col justify-center px-6 py-12 lg:px-8">
-  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 22 22" strokeWidth={1.5}  stroke="currentColor" class="mx-auto h-10 w-auto w-6  sm:h-9 h-6 dark:text-white">
-  <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-</svg>
-    <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white">Crie sua Conta</h2>
-  </div>
-  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-    <form class="space-y-6" action="#" method="POST">
-       <div>
-        <label for="text" class="block text-sm font-medium leading-6 text-white">Nome de usuário</label>
-        <div class="mt-2">
-          <input id="email" name="email" type="email" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></input>
-        </div>
-      </div>
-      <div>
-        <label for="email" class="block text-sm font-medium leading-6 text-white">E-mail</label>
-        <div class="mt-2">
-          <input id="email" name="email" type="email" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></input>
-        </div>
-      </div>
-      <div>
-          <label for="password" class="block text-center text-sm font-medium leading-6 text-white">Senha</label>
-        <div class="mt-2">
-          <input id="password" name="password" type="password" autocomplete="current-password" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"> </input>
-        </div>
-      </div>
-
-      <div>
-        <button type="submit" class="flex w-full justify-center rounded-md bg-white dark:bg-blue-900 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Entrar</button>
-      </div>
-    </form>
-
-    <p class="mt-10 text-center text-sm text-gray-500">
-      Nao possui conta?
-      <a href="#" class="font-semibold m-4 leading-6 text-indigo-600 hover:text-indigo-500">Crie sua Conta</a>
-    </p>
-  </div>
-</div>
-            </div>
-        </div>
-    </section>
-)
-}export default RegisterComponent;

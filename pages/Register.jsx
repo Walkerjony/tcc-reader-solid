@@ -1,6 +1,5 @@
 import RegisterComponent from "../components/auth/RegisterComponent";
 
-
 function Register() {
 return(
     <>

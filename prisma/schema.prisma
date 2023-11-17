@@ -22,16 +22,18 @@ model comment {
   content   String
   username  String
   bookId    String
+  userId    Int      // Adicione este campo
+  user      user     @relation(fields: [userId], references: [id]) // Defina a relação
   @@index([bookId], map: "Comment_bookId_fkey")
 }
 
+
 model like {
   id     Int  @id @default(autoincrement())
-  userId Int
+  userId Int  // Adicione este campo
+  user   user @relation(fields: [userId], references: [id]) // Defina a relação com a tabela user
   bookId Int
-
   @@index([bookId], map: "Like_bookId_fkey")
-  @@index([userId], map: "Like_userId_fkey")
 }
 
 model user {
@@ -41,6 +43,6 @@ model user {
   username String
   aboutYou String
   password String
+  comments comment[]
+  likes like[] // Adicione esta linha para a relação inversa
 }
-
-

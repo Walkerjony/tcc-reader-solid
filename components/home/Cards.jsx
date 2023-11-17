@@ -202,7 +202,7 @@ function Cards() {
                   <br />
                   Poesia
                 </p>
-                "Não lemos e escrevemos poesia porque é fofo. Lemos e escrevemos poesia porque somos membros da raça humana. E a raça humana está cheia de paixão. E medicina, direito, negócios, engenharia, essas são atividades nobres e necessário para sustentar a vida." - John Keating
+                "Não lemos e escrevemos poesia porque é bonitinho. Lemos e escrevemos poesia porque somos membros da raça humana e a raça humana está repleta de paixão. E medicina, advocacia, administração e engenharia, são objetivos nobres e necessários para manter-se vivo. Mas a poesia, beleza, romance, amor... é para isso que vivemos." - John Keating
 
               </h1>
             </header>
